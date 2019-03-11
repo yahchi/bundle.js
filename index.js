@@ -12,10 +12,6 @@ function getUrlParams(urlVars) {
     valueAndKey = [],
     resultArray = {};
 
-  /**
-   * Parse Url to utm params
-   */
-
   VarArray = (urlVars.substr(1)).split('&');
   if (VarArray[0] == "") return false;
 
@@ -95,3 +91,49 @@ function scrollAnimateSimple() {
     }
   });
 }
+
+/**
+ * Simple scrollTo plugin
+ */
+
+$('.scrollTo').click(function (event) {
+  event.preventDefault();
+  let target = $($(this).attr('href')),
+    offset = 0;
+  if (target.length) {
+    offset = target.offset().top - 100;
+  }
+  $('html, body').animate({ scrollTop: offset }, 500);
+});
+
+/**
+ * Scroll to top button
+ */
+
+function scrollTop() {
+  let $btBack = $('.scrollTopBtn'),
+    topOffset = $(window).height();
+
+  if (!$btBack.length) return;
+
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > topOffset) {
+      $btBack.addClass('b-backtop_visible');
+    } else {
+      $btBack.removeClass('b-backtop_visible');
+    }
+  });
+
+  $btBack.on('click', function (event) {
+    event.preventDefault();
+    $('body,html').animate({
+      scrollTop: 0
+    }, 500
+    );
+  });
+}
+scrollTop();
+
+/**
+ * 
+ */
